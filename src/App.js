@@ -11,14 +11,33 @@ import {
   Wrapper,
 } from './App.styles'
 import fetchAppDataByCityName from './utils/fetchAppDataByCityName'
+import fetchAppDataByLocation from './utils/fetchAppDataByLocation'
 
 function App() {
-
+  
   useEffect(() => {
     async function getGeocode() {
-      await fetchAppDataByCityName('london')      
+      try {
+        const fetchedData = await fetchAppDataByCityName('london')  
+        console.log(fetchedData)    
+      } catch(error) {
+        console.error(error)
+      }
     }
     getGeocode()
+  }, [])
+
+  useEffect(() => {
+    function getWeatherByLocation() {
+      try {
+        fetchAppDataByLocation((data) => {
+          console.log(data)
+        })
+      } catch(error) {
+        console.error(error)
+      }      
+    }
+    getWeatherByLocation()
   }, [])
 
   return (

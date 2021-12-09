@@ -14,10 +14,7 @@ const fetchAppDataByCityName = async (cityName) => {
     payload.lat = geocodeResult.data.features[0].center[1]
     payload.cityName = geocodeResult.data.features[0].text
     
-    const weatherResult = await weatherApi(payload.lat, payload.lon)
-    console.log(geocodeResult)
-    console.log(weatherResult)
-    console.log(payload)
+    return await weatherApi(payload.lat, payload.lon)
 
   } catch(error) {
     throw new Error(error)
