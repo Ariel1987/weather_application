@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useForecast } from '@/context/forecast'
+import { useForecast } from '../context/forecast'
 
 const useSunriseSunsetTime = () => {
   const { state } = useForecast()

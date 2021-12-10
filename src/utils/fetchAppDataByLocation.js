@@ -1,5 +1,6 @@
 import reverseGeocodeApi from '../services/reverseGeocodeApi'
 import weatherApi from '../services/weatherApi'
+import parseAppData from './parseAppData'
 
 const fetchAppDataByLocation = (setAppData) => {
   const payload = {
@@ -16,11 +17,9 @@ const fetchAppDataByLocation = (setAppData) => {
 
     const weatherResult = await weatherApi(payload.lat, payload.lon)
     const geocodeResult = await reverseGeocodeApi(payload.lon, payload.lat)
+    const data = parseAppData(weatherResult, geocodeResult)
 
-    setAppData({
-      weatherResult,
-      geocodeResult
-    })
+    setAppData(data)
   })
 }
 

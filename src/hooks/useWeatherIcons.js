@@ -1,6 +1,6 @@
-import weatherIcons from '@/utils/weatherIcons'
+import weatherIcons from '../utils/weatherIcons'
 import { useEffect, useState } from 'react'
-import { useForecast } from '@/context/forecast'
+import { useForecast } from '../context/forecast'
 import useSunriseSunsetTime from './useSunriseSunsetTime'
 
 const useWeatherIcons = () => {

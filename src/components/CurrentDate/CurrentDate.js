@@ -1,5 +1,5 @@
-const CurrentDate = () => {
-    return <p>12/12/2021</p>
-}
+import formatDate from '../../utils/formatDate'
+
+const CurrentDate = () => (<p>{formatDate(new Date())}</p>)
 
 export default CurrentDate

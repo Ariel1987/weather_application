@@ -9,36 +9,31 @@ import {
   CurrentWeatherDateWrapper,
   HeaderWrapper,
   Wrapper,
+  Modal
 } from './App.styles'
-import fetchAppDataByCityName from './utils/fetchAppDataByCityName'
 import fetchAppDataByLocation from './utils/fetchAppDataByLocation'
+import { useLoading, LOADING, LOADING_ENDED } from './context/loading'
+import { useForecast, FETCHING_FORECAST_SUCCESS } from './context/forecast'
 
 function App() {
-  
-  useEffect(() => {
-    async function getGeocode() {
-      try {
-        const fetchedData = await fetchAppDataByCityName('london')  
-        console.log(fetchedData)    
-      } catch(error) {
-        console.error(error)
-      }
-    }
-    getGeocode()
-  }, [])
+  const { state: { loading }, dispatch: dispatchLoading } = useLoading()
+  const { dispatch: dispatchForecast } = useForecast()
 
   useEffect(() => {
     function getWeatherByLocation() {
+      dispatchLoading({ type: LOADING })
       try {
         fetchAppDataByLocation((data) => {
-          console.log(data)
+          dispatchForecast({ type: FETCHING_FORECAST_SUCCESS, payload: data })
+          dispatchLoading({ type: LOADING_ENDED })
         })
       } catch(error) {
         console.error(error)
+        dispatchLoading({ type: LOADING_ENDED })
       }      
     }
     getWeatherByLocation()
-  }, [])
+  }, [dispatchLoading, dispatchForecast])
 
   return (
     <>
@@ -56,12 +51,12 @@ function App() {
         </CurrentWeatherConditionsWrapper>
       </Wrapper>
       <Footer />
-      {/* {loading && (
+      {loading && (
         <Modal loading={loading}>
           <img src="./images/loading.svg" alt="loading" />
         </Modal>
       )}
-      <ToastContainer
+      {/* <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
