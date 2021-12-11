@@ -8,7 +8,7 @@ import {
 import { useState } from 'react'
 import DailyForecast from './DailyForecast/DailyForecast'
 
-const Footer = () => {
+const Footer = (props) => {
   const [showWeatherForNextDays, setShowWeatherForNextDays] = useState(false)
 
   let buttonText = '7 days >'
@@ -33,16 +33,11 @@ const Footer = () => {
         </button>
       </HeaderWrapper>
       {!showWeatherForNextDays && (
+        <ul>
         <HourlyForecastWrapper>
-          <HourlyForecast />
-          <HourlyForecast />
-          <HourlyForecast />
-          <HourlyForecast />
-          <HourlyForecast />
-          <HourlyForecast />
-          <HourlyForecast />
-          <HourlyForecast />
+          <HourlyForecast/>
         </HourlyForecastWrapper>
+        </ul>
       )}
       {showWeatherForNextDays && (
         <DailyForecastWrapper>

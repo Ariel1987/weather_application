@@ -1,8 +1,12 @@
+import { useForecast } from "../../../../context/forecast"
+
 const Humidity = () => {
+  const { state } = useForecast()
+
   return (
     <div>
       <img src="./icons/humidity.png" alt="humidity" />
-      <p>10%</p>
+      <p>{state.data?.humidity}%</p>
     </div>
   )
 }

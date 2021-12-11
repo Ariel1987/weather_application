@@ -13,7 +13,7 @@ const useWeatherIcons = () => {
 
   useEffect(() => {
     if (state.data && !state.error) {
-      setWeather(state.data.current.weather[0].main)
+      setWeather(state.data.currentWeather)
     }
   }, [state])
 

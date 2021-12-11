@@ -8,8 +8,7 @@ export const Wrapper = styled.section`
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    background-image: url('images/day.jpg'); /* temporary */
-    ${'' /* background-image: url(${imgUrl}); */}
+    background-image: url(${imgUrl});
     text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;

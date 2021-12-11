@@ -1,5 +1,9 @@
+import { useForecast } from "../../../../context/forecast"
+
 const CurrentLocation = () => {
-  return <p>São Paulo</p>
+  const { state } = useForecast()
+
+  return <p>{state.data?.cityName}</p>
 }
 
 export default CurrentLocation

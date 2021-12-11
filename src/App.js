@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/Header/Header'
 import CurrentTemperature from './components/CurrentTemperature/CurrentTemperature'
 import CurrentDate from './components/CurrentDate/CurrentDate'
@@ -14,10 +14,13 @@ import {
 import fetchAppDataByLocation from './utils/fetchAppDataByLocation'
 import { useLoading, LOADING, LOADING_ENDED } from './context/loading'
 import { useForecast, FETCHING_FORECAST_SUCCESS } from './context/forecast'
+import useDayOrNightBackground from './hooks/useDayOrNightBackground'
 
 function App() {
   const { state: { loading }, dispatch: dispatchLoading } = useLoading()
   const { dispatch: dispatchForecast } = useForecast()
+  const [dayOrNight, setDayOrNight] = useState()
+  let dayTime = useDayOrNightBackground()
 
   useEffect(() => {
     function getWeatherByLocation() {
@@ -35,9 +38,16 @@ function App() {
     getWeatherByLocation()
   }, [dispatchLoading, dispatchForecast])
 
+  useEffect(() => {
+    if (dayTime !== dayOrNight) {
+      setDayOrNight(dayTime)
+    }
+  }, [dayOrNight, dayTime])
+
+
   return (
     <>
-      <Wrapper>
+      <Wrapper imgUrl={dayOrNight}>
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
@@ -50,7 +60,7 @@ function App() {
           <CurrentWeatherConditions />
         </CurrentWeatherConditionsWrapper>
       </Wrapper>
-      <Footer />
+      <Footer/>
       {loading && (
         <Modal loading={loading}>
           <img src="./images/loading.svg" alt="loading" />
