@@ -44,7 +44,6 @@ function App() {
     }
   }, [dayOrNight, dayTime])
 
-
   return (
     <>
       <Wrapper imgUrl={dayOrNight}>

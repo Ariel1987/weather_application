@@ -18,9 +18,9 @@ const parseWeatherData = (data) => {
     humidity: data.data.current.humidity,
     sunrise: new Date(data.data.current.sunrise*1000).getHours(),
     sunset: new Date(data.data.current.sunset*1000).getHours(),
-    hourlyTemperature: Math.round(data.data.hourly[0].temp),
-    hourlyWeather: data.data.hourly[0].weather.main,
-    dateTime: new Date(data.data.current.dt).getHours()
+    dateTime: new Date(data.data.current.dt*1000).getHours(),
+    hourly: data.data.hourly,
+    daily: data.data.daily
   }
 }
 

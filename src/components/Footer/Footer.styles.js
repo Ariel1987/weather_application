@@ -40,10 +40,12 @@ export const HeaderWrapper = styled.section`
 
 export const HourlyForecastWrapper = styled.section`
   ${({ theme }) => css`
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
-    overflow-x: scroll;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 20px;
+      overflow-x: scroll;
+    }
 
     img {
       width: 50px;
