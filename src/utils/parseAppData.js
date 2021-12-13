@@ -23,7 +23,7 @@ const parseWeatherData = (data) => {
     icon: data.data.current.weather[0].icon,
     timezone_offset: data.data.timezone_offset, 
     dateTime: data.data.current.dt,
-    timezone: data.data.timezone
+    timezone: data.data.timezone,
   }
 }
 

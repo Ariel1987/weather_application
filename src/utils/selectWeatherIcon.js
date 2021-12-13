@@ -1,14 +1,17 @@
 import icons from './weatherIcons'
 
 const selectWeatherIcon = (data, calculateDayTime = true) => {
-  if(!data) return
+  if (!data) return
 
   let dayTimeIcons
-  const weather = !data.weather ? data.currentWeather : data.weather[0].main 
+  const weather = !data.weather ? data.currentWeather : data.weather[0].main
   const dateTime = !data.dateTime ? data.dt : data.dateTime
 
   if (calculateDayTime) {
-    dayTimeIcons = dateTime > data.sunrise && dateTime < data.sunset ? icons.day : icons.night 
+    dayTimeIcons =
+      dateTime > data.sunrise && dateTime < data.sunset
+        ? icons.day
+        : icons.night
   } else {
     dayTimeIcons = icons.day
   }
@@ -27,7 +30,6 @@ const selectWeatherIcon = (data, calculateDayTime = true) => {
     default:
       return dayTimeIcons.Cloud
   }
-   
 }
 
 export default selectWeatherIcon
