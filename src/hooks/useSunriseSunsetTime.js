@@ -3,17 +3,18 @@ import { useForecast } from '../context/forecast'
 
 const useSunriseSunsetTime = () => {
   const { state } = useForecast()
-  const [sunriseSunsetTime, setSunRiseSunsetTime] = useState({
-    sunrise: null,
-    sunset: null,
-  })
-
+  const [sunriseSunsetTime, setSunRiseSunsetTime] = useState([])
+  
   useEffect(() => {
     if (state.data && !state.error) {
-      setSunRiseSunsetTime({
-        sunrise: state.data?.sunrise,
-        sunset: state.data?.sunset,
+      const timeData = state.data?.daily.map(timeData => {
+        return {
+          sunrise: timeData.sunrise,
+          sunset: timeData.sunset,
+          dateTime: timeData.dt
+        }
       })
+      setSunRiseSunsetTime(timeData)
     }
   }, [state])
   return sunriseSunsetTime

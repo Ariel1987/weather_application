@@ -16,11 +16,14 @@ const parseWeatherData = (data) => {
     max: Math.round(data.data.daily[0].temp.max),
     wind: Math.round(data.data.current.wind_speed),
     humidity: data.data.current.humidity,
-    sunrise: new Date(data.data.current.sunrise*1000).getHours(),
-    sunset: new Date(data.data.current.sunset*1000).getHours(),
-    dateTime: new Date(data.data.current.dt*1000).getHours(),
+    sunrise: data.data.current.sunrise,
+    sunset: data.data.current.sunset,
     hourly: data.data.hourly,
-    daily: data.data.daily
+    daily: data.data.daily,
+    icon: data.data.current.weather[0].icon,
+    timezone_offset: data.data.timezone_offset, 
+    dateTime: data.data.current.dt,
+    timezone: data.data.timezone
   }
 }
 

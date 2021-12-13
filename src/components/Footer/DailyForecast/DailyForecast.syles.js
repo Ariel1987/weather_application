@@ -9,6 +9,24 @@ export const Wrapper = styled.section`
       align-items: center;
       text-align: center;
       list-style: none;
+      width: 100%;
+
+      & > p {
+        width: 33%;
+      }
+
+      & > section {
+        width: 33%;
+      }
+
+      & > p:first-child {
+        text-align: left;
+      }
+
+      & > p:last-child {
+        text-align: right;
+      }
+
     }
 
     p {

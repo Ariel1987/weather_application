@@ -1,10 +1,10 @@
-import useSunriseSunsetTime from './useSunriseSunsetTime'
+import { useForecast } from '../context/forecast'
 
 const useDayOrNightBackground = () => {
-  const { sunrise, sunset } = useSunriseSunsetTime()
-  const now = new Date()
+  const { state } = useForecast()
+  const currentTime = state.data?.dateTime
 
-  return now.getHours() > sunrise && now.getHours() < sunset
+  return currentTime > state.data?.sunrise && currentTime < state.data?.sunset
     ? './images/day.jpg'
     : './images/night.jpg'
 }

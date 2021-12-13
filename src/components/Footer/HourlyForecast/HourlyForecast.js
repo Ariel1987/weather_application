@@ -1,22 +1,26 @@
 import { Wrapper } from './HourlyForecast.styles'
 import { useForecast } from '../../../context/forecast'
-import useWeatherIcons from '../../../hooks/useWeatherIcons'
+import selectWeatherIcon from '../../../utils/selectWeatherIcon'
+
+const oneDay = 24
 
 const HourlyForecast = () => {
   const { state } = useForecast()
-  const icons = useWeatherIcons()
+
+  const listHourlyForecast = () =>
+    state.data?.hourly.slice(0, oneDay).map((data) => {
+      return (
+        <li key={data.dt}>
+          <h5>{Math.round(data.temp)}º</h5>
+          <img src={selectWeatherIcon({ ...data, sunrise: state.data.sunrise, sunset: state.data.sunset })} alt="weather-icon" />
+          <p>{new Date(data.dt * 1000).getHours()}h</p>
+        </li>
+      )
+    })
 
   return (
     <Wrapper>
-      <ul>
-        {state.data?.hourly.slice(0, 24).map(data =>
-        <li key={data.dt}>
-          <h5>{Math.round(data.temp)}º</h5>
-          <img src={icons} alt="weather-icon" />
-          <p>{new Date(data.dt*1000).getHours()}h</p>
-        </li>
-        )}
-      </ul>
+      <ul>{listHourlyForecast()}</ul>
     </Wrapper>
   )
 }
