@@ -28,7 +28,7 @@ const parseWeatherData = (data) => {
 }
 
 const parseGeocodeData = (data) => {
-  const cityName = data.data.features[0].context[0].text 
+  const cityName = data.data.features[0].text 
 
   return {
     cityName,

@@ -12,7 +12,9 @@ import { useLoading, LOADING, LOADING_ENDED } from '../../../../context/loading'
 import {
   useForecast,
   FETCHING_FORECAST_BY_LOCATION_SUCCESS,
+  FETCHING_FORECAST_ERROR,
 } from '../../../../context/forecast'
+import fetchAppDataByCityName from '../../../../utils/fetchAppDataByCityName'
 // import { toast } from 'react-toastify'
 
 const Search = ({ showSearchBar, closeSearch }) => {
@@ -20,7 +22,21 @@ const Search = ({ showSearchBar, closeSearch }) => {
   const { dispatch: dispatchLoading } = useLoading()
   const { dispatch: dispatchForecastData } = useForecast()
 
-  const handleSearchCity = (event) => {}
+  const handleSearchCity = async (event) => {
+    event.preventDefault()
+    dispatchLoading({ type: LOADING })
+
+    try {
+      const response = await fetchAppDataByCityName(city)
+      dispatchForecastData({ type: FETCHING_FORECAST_BY_LOCATION_SUCCESS, payload: response })
+      dispatchLoading({ type: LOADING_ENDED })
+    } catch(error) {
+      dispatchForecastData({ type: FETCHING_FORECAST_ERROR })
+      dispatchLoading({ type: LOADING_ENDED })
+    }
+    closeSearch(false)
+    setCity('')
+  }
 
   if (!showSearchBar) return null
 

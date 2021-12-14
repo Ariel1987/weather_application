@@ -15,7 +15,7 @@ const Footer = () => {
   if (showWeatherForNextDays === true) {
     buttonText = 'Today >'
   }
-
+  
   const handleShowWeatherForNextDays = () => {
     setShowWeatherForNextDays((prev) => prev !== true)
   }
