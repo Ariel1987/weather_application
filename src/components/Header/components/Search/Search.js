@@ -13,6 +13,7 @@ import {
   useForecast,
   FETCHING_FORECAST_BY_LOCATION_SUCCESS,
   FETCHING_FORECAST_ERROR,
+  SET_DAILY_FORECAST,
 } from '../../../../context/forecast'
 import fetchAppDataByCityName from '../../../../utils/fetchAppDataByCityName'
 // import { toast } from 'react-toastify'
@@ -29,6 +30,7 @@ const Search = ({ showSearchBar, closeSearch }) => {
     try {
       const response = await fetchAppDataByCityName(city)
       dispatchForecastData({ type: FETCHING_FORECAST_BY_LOCATION_SUCCESS, payload: response })
+      dispatchForecastData({ type: SET_DAILY_FORECAST })
       dispatchLoading({ type: LOADING_ENDED })
     } catch(error) {
       dispatchForecastData({ type: FETCHING_FORECAST_ERROR })

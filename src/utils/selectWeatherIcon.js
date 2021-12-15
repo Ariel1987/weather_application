@@ -1,17 +1,28 @@
 import icons from './weatherIcons'
+import { utcToZonedTime } from 'date-fns-tz'
 
 const selectWeatherIcon = (data, calculateDayTime = true) => {
   if (!data) return
 
   let dayTimeIcons
   const weather = !data.weather ? data.currentWeather : data.weather[0].main
-  const dateTime = !data.dateTime ? data.dt : data.dateTime
+
+  const now = data.now
+    ? utcToZonedTime(new Date(data.now * 1000), data.timezone).getHours()
+    : utcToZonedTime(new Date(), data.timezone).getHours()
+
+  const sunrise = utcToZonedTime(
+    new Date(data.sunrise * 1000),
+    data.timezone,
+  ).getHours()
+  
+  const sunset = utcToZonedTime(
+    new Date(data.sunset * 1000),
+    data.timezone,
+  ).getHours()
 
   if (calculateDayTime) {
-    dayTimeIcons =
-      dateTime > data.sunrise && dateTime < data.sunset
-        ? icons.day
-        : icons.night
+    dayTimeIcons = now > sunrise && now < sunset ? icons.day : icons.night
   } else {
     dayTimeIcons = icons.day
   }

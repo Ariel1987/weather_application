@@ -4,13 +4,16 @@ export const FETCHING_FORECAST = 'FETCHING_FORECAST'
 export const FETCHING_FORECAST_SUCCESS = 'FETCHING_FORECAST_SUCCESS'
 export const FETCHING_FORECAST_ERROR = 'FETCHING_FORECAST_ERROR'
 export const FETCHING_FORECAST_BY_LOCATION_SUCCESS = 'FETCHING_FORECAST_BY_LOCATION_SUCCESS'
+export const RESET_DAILY_FORECAST = 'RESET_DAILY_FORECAST'
+export const SET_DAILY_FORECAST = 'SET_DAILY_FORECAST'
 
 const ForecastContext = React.createContext()
 
 const initState = {
   error: false,
   data: null,
-  userSearch: false
+  userSearch: false,
+  resetDailyForecast: false
 }
 
 function forecastReducer(state = initState, action) {
@@ -23,7 +26,7 @@ function forecastReducer(state = initState, action) {
         ...state,
         data: action.payload,
         error: false,
-        userSearch: false
+        userSearch: false,
       }
     }
     case FETCHING_FORECAST_BY_LOCATION_SUCCESS: {
@@ -32,6 +35,18 @@ function forecastReducer(state = initState, action) {
         userSearch: true,
         data: action.payload,
         error: false,
+      }
+    }
+    case RESET_DAILY_FORECAST: {
+      return {
+        ...state,
+        resetDailyForecast: true 
+      }
+    }
+    case SET_DAILY_FORECAST: {
+      return {
+        ...state,
+        resetDailyForecast: false 
       }
     }
     case FETCHING_FORECAST_ERROR: {

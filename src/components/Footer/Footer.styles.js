@@ -59,7 +59,8 @@ export const DailyForecastWrapper = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 20px;
+    padding-top: 24px;
+    padding-bottom: 24px;
 
     img {
       width: 50px;

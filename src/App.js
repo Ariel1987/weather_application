@@ -16,6 +16,8 @@ import { useLoading, LOADING, LOADING_ENDED } from './context/loading'
 import { useForecast, FETCHING_FORECAST_SUCCESS } from './context/forecast'
 import useDayOrNightBackground from './hooks/useDayOrNightBackground'
 
+const duration = 1000 * 60 * 60
+
 function App() {
   const { state: { loading }, dispatch: dispatchLoading } = useLoading()
   const { dispatch: dispatchForecast } = useForecast()
@@ -23,6 +25,10 @@ function App() {
   let dayTime = useDayOrNightBackground()
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      getWeatherByLocation()  
+    }, duration)
+    
     function getWeatherByLocation() {
       dispatchLoading({ type: LOADING })
       try {
@@ -36,6 +42,8 @@ function App() {
       }      
     }
     getWeatherByLocation()
+    
+    return () => interval
   }, [dispatchLoading, dispatchForecast])
 
   useEffect(() => {

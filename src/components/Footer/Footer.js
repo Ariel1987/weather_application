@@ -5,25 +5,24 @@ import {
   HourlyForecastWrapper,
   Wrapper,
 } from './Footer.styles'
-import { useState } from 'react'
 import DailyForecast from './DailyForecast/DailyForecast'
+import { SET_DAILY_FORECAST, RESET_DAILY_FORECAST, useForecast } from '../../context/forecast'
 
 const Footer = () => {
-  const [showWeatherForNextDays, setShowWeatherForNextDays] = useState(false)
+  const { state: { resetDailyForecast }, dispatch } = useForecast()
 
-  let buttonText = '7 days >'
-  if (showWeatherForNextDays === true) {
-    buttonText = 'Today >'
-  }
+  let buttonText = resetDailyForecast ? 'Today >' : '7 days >'
   
   const handleShowWeatherForNextDays = () => {
-    setShowWeatherForNextDays((prev) => prev !== true)
+    const shouldResetDailyForecast = buttonText === '7 days >' ? RESET_DAILY_FORECAST : SET_DAILY_FORECAST 
+
+    dispatch({ type: shouldResetDailyForecast })
   }
 
   return (
     <Wrapper>
       <HeaderWrapper>
-        {!showWeatherForNextDays && <h3>Today</h3>}
+        {!resetDailyForecast && <h3>Today</h3>}
         <button
           type="button"
           onClick={handleShowWeatherForNextDays}
@@ -32,12 +31,12 @@ const Footer = () => {
           {buttonText}
         </button>
       </HeaderWrapper>
-      {!showWeatherForNextDays && (
+      {!resetDailyForecast && (
         <HourlyForecastWrapper>
           <HourlyForecast/>
         </HourlyForecastWrapper>
       )}
-      {showWeatherForNextDays && (
+      {resetDailyForecast && (
         <DailyForecastWrapper>
           <DailyForecast />
         </DailyForecastWrapper>
