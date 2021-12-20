@@ -6,7 +6,6 @@ const selectWeatherIcon = (data, calculateDayTime = true) => {
 
   let dayTimeIcons
   const weather = !data.weather ? data.currentWeather : data.weather[0].main
-
   const now = data.now
     ? utcToZonedTime(new Date(data.now * 1000), data.timezone).getHours()
     : utcToZonedTime(new Date(), data.timezone).getHours()
@@ -26,7 +25,6 @@ const selectWeatherIcon = (data, calculateDayTime = true) => {
   } else {
     dayTimeIcons = icons.day
   }
-
   switch (weather) {
     case 'Clear':
       return dayTimeIcons.Clear

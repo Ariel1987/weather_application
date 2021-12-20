@@ -2,7 +2,11 @@ import { useState } from 'react'
 import CurrentLocation from './components/CurrentLocation/CurrentLocation'
 import Search from './components/Search/Search'
 import { BackButton, Button, SearchLocationWrapper } from './Header.styles'
-import { useForecast, FETCHING_FORECAST_SUCCESS, SET_DAILY_FORECAST } from '../../context/forecast'
+import {
+  useForecast,
+  FETCHING_FORECAST_SUCCESS,
+  SET_DAILY_FORECAST,
+} from '../../context/forecast'
 import { useLoading, LOADING, LOADING_ENDED } from '../../context/loading'
 import fetchAppDataByLocation from '../../utils/fetchAppDataByLocation'
 
@@ -34,12 +38,12 @@ const Header = () => {
 
   return (
     <>
+      {userSearch && (
+        <BackButton onClick={handleBackButton}>
+          <img src="./icons/back-arrow.png" alt="back-arrow" />
+        </BackButton>
+      )}
       <SearchLocationWrapper>
-        {userSearch && (
-          <BackButton onClick={handleBackButton}>
-            <img src="./icons/back-arrow.png" alt="back-arrow" />
-          </BackButton>
-        )}
         {!showSearchBar && (
           <CurrentLocation onClick={() => handleShowSearchBar(true)} />
         )}

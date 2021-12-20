@@ -16,7 +16,7 @@ import {
   SET_DAILY_FORECAST,
 } from '../../../../context/forecast'
 import fetchAppDataByCityName from '../../../../utils/fetchAppDataByCityName'
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 const Search = ({ showSearchBar, closeSearch }) => {
   const [city, setCity] = useState('')
@@ -35,6 +35,7 @@ const Search = ({ showSearchBar, closeSearch }) => {
     } catch(error) {
       dispatchForecastData({ type: FETCHING_FORECAST_ERROR })
       dispatchLoading({ type: LOADING_ENDED })
+      toast.error(error)
     }
     closeSearch(false)
     setCity('')

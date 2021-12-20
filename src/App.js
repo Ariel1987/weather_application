@@ -15,6 +15,8 @@ import fetchAppDataByLocation from './utils/fetchAppDataByLocation'
 import { useLoading, LOADING, LOADING_ENDED } from './context/loading'
 import { useForecast, FETCHING_FORECAST_SUCCESS } from './context/forecast'
 import useDayOrNightBackground from './hooks/useDayOrNightBackground'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const duration = 1000 * 60 * 60
 
@@ -38,6 +40,7 @@ function App() {
         })
       } catch(error) {
         console.error(error)
+        toast.error(error)
         dispatchLoading({ type: LOADING_ENDED })
       }      
     }
@@ -73,7 +76,7 @@ function App() {
           <img src="./images/loading.svg" alt="loading" />
         </Modal>
       )}
-      {/* <ToastContainer
+      <ToastContainer
         position="bottom-center"
         autoClose={5000}
         hideProgressBar={false}
@@ -84,7 +87,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-      /> */}
+      />
     </>
   )
 }

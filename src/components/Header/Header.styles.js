@@ -20,8 +20,8 @@ export const Button = styled.button`
 
 export const BackButton = styled.button`
   position: absolute;
-  top: -24px;
-  left: -132px;
+  bottom: 96%;
+  right: 92%;
   background: none;
   border: none;
 

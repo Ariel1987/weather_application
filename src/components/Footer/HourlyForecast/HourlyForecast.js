@@ -7,15 +7,16 @@ const oneDay = 24
 
 const HourlyForecast = () => {
   const { state } = useForecast()
-  const timeZone = state.data?.timezone
+  const timezone = state.data?.timezone
 
   const listHourlyForecast = () =>
     state.data?.hourly.slice(0, oneDay).map((data) => {
       const date = new Date(data.dt * 1000)
-      const zonedDate = utcToZonedTime(date, timeZone)
+      const zonedDate = utcToZonedTime(date, timezone)
       const weatherData = {
         ...data,
         now: data.dt,
+        timezone,
         sunrise: state.data.sunrise,
         sunset: state.data.sunset,
       }
